@@ -1,9 +1,9 @@
 import random
 
-# Constants
 WAGE_PER_HOUR = 20
 FULL_DAY_HOUR = 8
 PART_TIME_HOUR = 4
+WORKING_DAYS_IN_MONTH = 20
 
 def check_attendance():
     print("Welcome to Employee Wages Computation Program on Master Branch")
@@ -26,10 +26,21 @@ def emp_daily_wage():
         # Calculate daily wage based on employee type
         daily_wage = wage_calculator[emp_type]()
         print(f"The Employee is present and {'full-time' if emp_type == 1 else 'part-time'} so the daily wage is: {daily_wage}")
+        return daily_wage
     else:
-        daily_wage = 0
-        print(f"The Employee is absent for the day so the daily wage is: {daily_wage}")
+        print(f"The Employee is absent for the day so the daily wage is: 0")
+        return 0
+
+def calculate_monthly_wage():
+    total_wage = 0
+
+    for day in range(1, WORKING_DAYS_IN_MONTH + 1):
+        print(f"\nDay {day}:")
+        daily_wage = emp_daily_wage()
+        total_wage += daily_wage
+
+    print(f"\nTotal wage for the month (for {WORKING_DAYS_IN_MONTH} days): {total_wage}")
 
 if __name__ == "__main__":
-    emp_daily_wage()
+    calculate_monthly_wage()
 
